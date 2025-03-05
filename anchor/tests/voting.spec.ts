@@ -8,22 +8,24 @@ import { BankrunProvider, startAnchor } from "anchor-bankrun";
 import { ProgramTestContext } from "solana-bankrun";
 
 const votingAddress = new PublicKey(
-  "coUnmi3oBUtwtd9fjeAvSsJssXh5A5xyPbhpewyzRVF"
+  "CRvVtKXdRUadhSN1yN7w6EZFgR2gVSfdCnsj1dF7CytV"
 );
 
 describe("Voting", () => {
   let context: ProgramTestContext;
   let provider: BankrunProvider;
-  let votingProgram: Program<Voting>;
+  anchor.setProvider(anchor.AnchorProvider.env());
+  let votingProgram: Program<Voting> = anchor.workspace
+    .Voting as Program<Voting>;
 
   beforeAll(async () => {
-    context = await startAnchor(
-      "",
-      [{ name: "Voting", programId: votingAddress }],
-      []
-    );
-    provider = new BankrunProvider(context);
-    votingProgram = new Program<Voting>(IDL as Voting, provider);
+    // context = await startAnchor(
+    //   "",
+    //   [{ name: "Voting", programId: votingAddress }],
+    //   []
+    // );
+    // provider = new BankrunProvider(context);
+    // votingProgram = new Program<Voting>(IDL as Voting, provider);
   });
 
   it("Initialize Poll", async () => {
